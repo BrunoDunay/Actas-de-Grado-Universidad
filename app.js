@@ -100,7 +100,7 @@
 
   [...CARRERAS]
     .sort((a, b) => a.rvoe.localeCompare(b.rvoe))
-    .forEach((c) => $('carrera').add(new Option(`${c.grado} · ${c.acuerdo}`, c.rvoe)));
+    .forEach((c) => $('carrera').add(new Option(`${c.acuerdo} · ${c.grado}`, c.rvoe)));
 
   // si el grado no cabe holgado en un renglón, se reparte en dos lo más parejo posible
   function splitGrado(grado) {

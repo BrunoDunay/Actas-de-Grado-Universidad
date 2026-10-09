@@ -99,7 +99,7 @@
   const field = (name) => inputs.find((el) => el.dataset.f === name);
 
   [...CARRERAS]
-    .sort((a, b) => a.grado.localeCompare(b.grado, 'es') || a.rvoe.localeCompare(b.rvoe))
+    .sort((a, b) => a.rvoe.localeCompare(b.rvoe))
     .forEach((c) => $('carrera').add(new Option(`${c.grado} · ${c.acuerdo}`, c.rvoe)));
 
   // si el grado no cabe holgado en un renglón, se reparte en dos lo más parejo posible

@@ -87,6 +87,8 @@
       saved = JSON.parse(localStorage.getItem(STORE_KEY));
     } catch { /* datos guardados ilegibles: se usan los valores por defecto */ }
     if (!saved) return;
+    // el lugar por defecto antes iba en mayúsculas; si quedó guardado así, se usa el nuevo
+    if (saved.lugar === 'AGUASCALIENTES, AGS.') delete saved.lugar;
     inputs.forEach((el) => {
       if (el.dataset.f in saved) writeInput(el, saved[el.dataset.f]);
     });

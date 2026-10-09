@@ -1,0 +1,195 @@
+@font-face { font-family: "Carlito"; font-weight: 400; font-display: block; src: url("fonts/carlito-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Carlito"; font-weight: 700; font-display: block; src: url("fonts/carlito-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Outfit"; font-weight: 400; font-display: block; src: url("fonts/outfit-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Outfit"; font-weight: 500; font-display: block; src: url("fonts/outfit-latin-500-normal.woff2") format("woff2"); }
+
+:root {
+  --navy: #0f1e40;
+  --gold: #d4a80a;
+  --bg: #eef0f4;
+  --line: #d5d9e2;
+  --muted: #5d6578;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #1b2233;
+  font: 15px/1.4 "Outfit", system-ui, "Segoe UI", sans-serif;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background: #fff;
+  border-bottom: 3px solid var(--gold);
+}
+.topbar-logo { height: 34px; }
+.topbar h1 { margin: 0; font-size: 18px; font-weight: 500; color: var(--navy); }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+  gap: 24px;
+  padding: 24px;
+  align-items: start;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+/* ---------- formulario ---------- */
+.panel { display: grid; gap: 14px; }
+
+fieldset {
+  margin: 0;
+  padding: 14px 16px 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: grid;
+  gap: 10px;
+}
+legend {
+  padding: 0 6px;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+
+input[type="text"], select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: #1b2233;
+  font: inherit;
+  font-size: 15px;
+}
+input[type="text"]:focus, select:focus {
+  outline: 2px solid var(--navy);
+  outline-offset: -1px;
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.grid-4 { display: grid; grid-template-columns: 1fr .7fr 1.5fr 1fr; gap: 10px; }
+
+.check { display: flex; align-items: center; gap: 8px; color: #1b2233; }
+.range { grid-template-columns: 80px 1fr; align-items: center; }
+.file-row { display: flex; align-items: center; gap: 8px; }
+.hint { margin: 0; font-size: 12.5px; color: var(--muted); }
+#status { min-height: 1.4em; color: var(--navy); }
+#status.error { color: #b3261e; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 16px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: #1a2e5c; }
+.btn-ghost { background: #fff; border-color: var(--line); color: var(--navy); }
+.btn-ghost:hover { border-color: var(--navy); }
+.btn-link { background: none; color: var(--muted); padding-inline: 8px; }
+.btn-link:hover { color: #b3261e; }
+.btn:disabled { opacity: .6; cursor: wait; }
+
+/* ---------- vista previa ---------- */
+.preview { position: sticky; top: 16px; min-width: 0; }
+.scaler { transform-origin: top left; }
+
+/* ---------- hoja carta (medidas tomadas del acta de referencia) ---------- */
+.page {
+  position: relative;
+  width: 215.9mm;
+  height: 279.4mm;
+  overflow: hidden;
+  background: #fff;
+  color: #111;
+  font: 12pt/1.25 "Carlito", Calibri, sans-serif;
+  box-shadow: 0 2px 14px rgba(15, 30, 64, .18);
+}
+
+.pg-logo { position: absolute; left: 14mm; top: 13mm; width: 62mm; }
+.pg-header {
+  position: absolute; right: 18mm; top: 28.5mm;
+  font: bold 12pt "Times New Roman", Times, serif;
+}
+.pg-title { position: absolute; left: 69mm; top: 60mm; width: 136mm; text-align: center; }
+
+.pg-photo { position: absolute; left: 9mm; top: 71mm; width: 49mm; height: 66mm; }
+.pg-photo img { display: block; width: 100%; height: 100%; }
+.pg-photo-empty {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  border: 1px dashed #a9b0bf; border-radius: 50%;
+  color: #a9b0bf; font: 10pt "Outfit", sans-serif;
+}
+
+.pg-body { position: absolute; left: 69mm; top: 73.5mm; width: 136mm; }
+.pg-body p { margin: 0; }
+.pg-body .row { display: flex; align-items: baseline; gap: 1.2mm; margin-bottom: 3.6mm; white-space: nowrap; }
+.pg-body .row.tight { margin-bottom: 0; }
+.pg-body .gap-s { margin-top: 4.6mm; margin-bottom: 2.2mm; }
+.pg-body .gap-l { margin-top: 9.5mm; }
+.pg-body .gap-m { margin-top: 6mm; }
+.pg-body .just { text-align: justify; }
+.pg-body .just-all { text-align: justify; text-align-last: justify; }
+
+.fld {
+  display: block;
+  min-width: 0;
+  min-height: 5.6mm;
+  padding: 0 1mm .2mm;
+  border-bottom: .25mm solid #111;
+  overflow: hidden;
+  text-align: center;
+  font: 9.5pt/5.2mm "Outfit", "Century Gothic", sans-serif;
+}
+.fld.full { flex: 1; }
+.fld.left { text-align: left; }
+
+.pg-protesta { position: absolute; left: 56.5mm; top: 212.5mm; margin: 0; }
+
+.pg-sign { position: absolute; left: 59.5mm; top: 226mm; width: 100mm; text-align: center; }
+.pg-sign-area { position: relative; height: 19mm; }
+.pg-sign-area img {
+  position: absolute; left: 50%; bottom: -5mm;
+  max-width: 60mm; max-height: 26mm;
+  transform: translateX(-50%);
+}
+.pg-vobo { position: absolute; left: 0; right: 0; bottom: 1.2mm; font: 7.5pt "Outfit", sans-serif; }
+.pg-sign-line { width: 43mm; margin: 0 auto; border-top: .25mm solid #111; }
+.pg-sign-name { margin-top: 5.5mm; font: 500 9.5pt "Outfit", "Century Gothic", sans-serif; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; padding: 14px; }
+  .preview { position: static; }
+}
+
+@page { size: letter; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .topbar, .panel, .pg-photo-empty { display: none !important; }
+  .layout { display: block; padding: 0; max-width: none; }
+  .preview { position: static; height: auto !important; }
+  .scaler { transform: none !important; }
+  .page { box-shadow: none; }
+}

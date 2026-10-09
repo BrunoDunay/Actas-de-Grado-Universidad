@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Actas de Grado · UNADE</title>
+  <link rel="icon" href="assets/logo-unade.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <img src="assets/logo-unade.png" alt="UNADE" class="topbar-logo">
+    <h1>Generador de Actas de Grado</h1>
+  </header>
+
+  <main class="layout">
+    <form class="panel" id="form" autocomplete="off">
+      <fieldset>
+        <legend>Sustentante</legend>
+        <label>Nombre completo
+          <input data-f="nombre" type="text" placeholder="Nombre(s) y apellidos">
+        </label>
+        <label>Carrera (RVOE)
+          <select data-f="carrera" id="carrera">
+            <option value="">— Seleccionar carrera —</option>
+          </select>
+        </label>
+        <p class="hint">Al elegir la carrera se llenan solos el grado, el acuerdo y su fecha. También puedes escribir el número de RVOE en «Acuerdo No.».</p>
+        <label>Grado a obtener
+          <input data-f="grado" type="text" placeholder="Maestría en…">
+        </label>
+        <label>Grado (segunda línea, opcional)
+          <input data-f="grado2" type="text" placeholder="Solo si el nombre del grado no cabe en una línea">
+        </label>
+        <label>Aprobó conforme (forma de titulación)
+          <select data-f="conforme">
+            <option value="">— Seleccionar —</option>
+            <option>a Promedio</option>
+            <option>a Diplomado</option>
+            <option>a Tesis</option>
+            <option>a Publicación</option>
+            <option>a Estudios de Maestría</option>
+            <option>a Estudios de Doctorado</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Fotografía</legend>
+        <div class="file-row">
+          <label class="btn btn-ghost">Subir foto
+            <input id="photoInput" type="file" accept="image/*" hidden>
+          </label>
+          <button type="button" class="btn btn-link" id="photoClear" hidden>Quitar</button>
+        </div>
+        <div id="photoControls" hidden>
+          <label class="range">Zoom
+            <input id="photoZoom" type="range" min="1" max="3" step="0.01" value="1">
+          </label>
+          <label class="range">Horizontal
+            <input id="photoX" type="range" min="-1" max="1" step="0.01" value="0">
+          </label>
+          <label class="range">Vertical
+            <input id="photoY" type="range" min="-1" max="1" step="0.01" value="0">
+          </label>
+          <label class="check">
+            <input id="photoGray" type="checkbox"> Blanco y negro
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Lugar y fecha del acta</legend>
+        <label>Lugar
+          <input data-f="lugar" type="text" value="AGUASCALIENTES, AGS.">
+        </label>
+        <div class="grid-4">
+          <label>Hora
+            <input data-f="hora" type="text" placeholder="12:00">
+          </label>
+          <label>Día
+            <input data-f="dia" type="text" inputmode="numeric" placeholder="1">
+          </label>
+          <label>Mes
+            <select data-f="mes">
+              <option value=""></option>
+              <option>Enero</option><option>Febrero</option><option>Marzo</option>
+              <option>Abril</option><option>Mayo</option><option>Junio</option>
+              <option>Julio</option><option>Agosto</option><option>Septiembre</option>
+              <option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
+            </select>
+          </label>
+          <label>Año
+            <input data-f="anio" type="text" inputmode="numeric" placeholder="2026">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Fundamento y RVOE</legend>
+        <label>De conformidad con
+          <input data-f="fundamento" type="text" value="Título XV. Capítulo II. Artículo 164.">
+        </label>
+        <div class="grid-2">
+          <label>Acuerdo No.
+            <input data-f="acuerdo" type="text" placeholder="2023-1743">
+          </label>
+          <label>Fecha del acuerdo
+            <input data-f="fechaAcuerdo" type="text" placeholder="19/6/2023">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Encabezado y firma</legend>
+        <label>Texto del encabezado (derecha)
+          <input data-f="encabezado" type="text" value="UNADE">
+        </label>
+        <label>Nombre de quien firma
+          <input data-f="firmante" type="text" value="Mtro. Francisco Adolfo Valencia Juárez">
+        </label>
+        <label class="check">
+          <input data-f="vobo" type="checkbox" checked> Mostrar «Vo.Bo.» sobre la línea de firma
+        </label>
+        <div class="file-row">
+          <label class="btn btn-ghost">Subir imagen de firma (opcional)
+            <input id="signInput" type="file" accept="image/*" hidden>
+          </label>
+          <button type="button" class="btn btn-link" id="signClear" hidden>Quitar</button>
+        </div>
+        <p class="hint">Si no subes una imagen, la línea queda en blanco para firmar a mano.</p>
+      </fieldset>
+
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="btnPdf">Descargar PDF</button>
+        <button type="button" class="btn btn-primary" id="btnDocx">Descargar Word</button>
+        <button type="button" class="btn btn-ghost" id="btnPrint">Imprimir</button>
+        <button type="button" class="btn btn-link" id="btnNew">Nueva acta</button>
+        <button type="button" class="btn btn-link" id="btnReset">Borrar todo</button>
+      </div>
+      <p class="hint" id="status" role="status"></p>
+      <p class="hint">Los datos se quedan en este navegador; no se envían a ningún servidor.</p>
+    </form>
+
+    <section class="preview" id="preview" aria-label="Vista previa del acta">
+      <div class="scaler" id="scaler">
+        <div class="page" id="page">
+          <img class="pg-logo" id="pvLogo" src="assets/logo-unade.png" alt="">
+          <div class="pg-header" data-pv="encabezado"></div>
+          <div class="pg-title">ACTA DE GRADO</div>
+
+          <div class="pg-photo">
+            <img id="pvPhoto" alt="" hidden>
+            <div class="pg-photo-empty" id="pvPhotoEmpty" data-html2canvas-ignore>Fotografía</div>
+          </div>
+
+          <div class="pg-body">
+            <div class="row">
+              <span>En</span><span class="fld" style="flex:2.3" data-pv="lugar"></span>
+              <span>, a las</span><span class="fld" style="flex:1" data-pv="hora"></span>
+              <span>horas del día</span><span class="fld" style="flex:.9" data-pv="dia"></span>
+              <span>del mes</span>
+            </div>
+            <div class="row">
+              <span>de</span><span class="fld" style="width:43mm" data-pv="mes"></span>
+              <span>de</span><span class="fld" style="width:27mm" data-pv="anio"></span>
+              <span>, de conformidad con</span>
+            </div>
+            <div class="row tight"><span class="fld full" data-pv="fundamento"></span></div>
+
+            <p class="just gap-s">establecido en el reglamento institucional vigente, se procede a expedir la presente acta para obtener el grado de:</p>
+            <div class="row tight"><span class="fld full" data-pv="grado"></span></div>
+            <div class="row gap-m"><span class="fld full" data-pv="grado2"></span></div>
+
+            <p class="gap-l">Con Reconocimiento de Validez Oficial de la S.E.P.,</p>
+            <div class="row tight">
+              <span>según acuerdo No.</span><span class="fld" style="width:27mm" data-pv="acuerdo"></span>
+              <span>de fecha</span><span class="fld" style="width:37mm" data-pv="fechaAcuerdo"></span>
+              <span>, a favor de:</span>
+            </div>
+
+            <div class="row gap-l"><span class="fld full" data-pv="nombre"></span></div>
+
+            <p class="just-all gap-l">Quien demostró cumplir con los estudios correspondientes y aprobó</p>
+            <div class="row tight">
+              <span>conforme</span><span class="fld left" style="flex:1" data-pv="conforme"></span>
+            </div>
+          </div>
+
+          <p class="pg-protesta">En virtud de lo anterior se procedió a tomar la protesta de ley.</p>
+
+          <div class="pg-sign">
+            <div class="pg-sign-area">
+              <img id="pvSign" alt="" hidden>
+              <span class="pg-vobo" id="pvVobo">Vo.Bo.</span>
+            </div>
+            <div class="pg-sign-line"></div>
+            <div class="pg-sign-name" data-pv="firmante"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="vendor/html2canvas.min.js"></script>
+  <script src="vendor/jspdf.umd.min.js"></script>
+  <script src="vendor/docx.iife.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -139,8 +139,8 @@ input[type="text"]:focus, select:focus {
 /* sin foto: solo una rayita al pie del espacio, como guía para pegarla a mano */
 .pg-photo-empty {
   position: absolute; left: 50%; bottom: 0;
-  width: 30mm; margin-left: -15mm;
-  border-top: .25mm solid #111;
+  width: 8mm; margin-left: -4mm;
+  border-top: .15mm solid #b5b5b5;
 }
 
 .pg-body { position: absolute; left: 69mm; top: 73.5mm; width: 136mm; }

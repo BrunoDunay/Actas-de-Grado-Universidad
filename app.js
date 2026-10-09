@@ -295,7 +295,7 @@
         data: dataUrlToBytes(photo.dataUrl),
         transformation: { width: px(49), height: px(66) },
       })], { spacing: { before: tw(41) } })
-      : para([text('_'.repeat(16))], { indent: { left: tw(9.5) }, spacing: { before: tw(41 + 61) } })];
+      : para([text('_'.repeat(5), { size: 16, color: 'B5B5B5' })], { indent: { left: tw(20.5) }, spacing: { before: tw(41 + 62) } })];
 
     const bodyCell = [
       para([text('ACTA DE GRADO')], {

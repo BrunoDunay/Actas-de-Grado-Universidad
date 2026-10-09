@@ -288,16 +288,14 @@
       children,
     });
 
-    const photoCell = [para(
-      photo.dataUrl
-        ? [new D.ImageRun({
-          type: 'png',
-          data: dataUrlToBytes(photo.dataUrl),
-          transformation: { width: px(49), height: px(66) },
-        })]
-        : [],
-      { spacing: { before: tw(41) } },
-    )];
+    // sin foto queda una rayita al pie del espacio, como guía para pegarla a mano
+    const photoCell = [photo.dataUrl
+      ? para([new D.ImageRun({
+        type: 'png',
+        data: dataUrlToBytes(photo.dataUrl),
+        transformation: { width: px(49), height: px(66) },
+      })], { spacing: { before: tw(41) } })
+      : para([text('_'.repeat(16))], { indent: { left: tw(9.5) }, spacing: { before: tw(41 + 61) } })];
 
     const bodyCell = [
       para([text('ACTA DE GRADO')], {

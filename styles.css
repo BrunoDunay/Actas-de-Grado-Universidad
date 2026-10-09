@@ -136,11 +136,11 @@ input[type="text"]:focus, select:focus {
 
 .pg-photo { position: absolute; left: 9mm; top: 71mm; width: 49mm; height: 66mm; }
 .pg-photo img { display: block; width: 100%; height: 100%; }
+/* sin foto: solo una rayita al pie del espacio, como guía para pegarla a mano */
 .pg-photo-empty {
-  display: flex; align-items: center; justify-content: center;
-  width: 100%; height: 100%;
-  border: 1px dashed #a9b0bf; border-radius: 50%;
-  color: #a9b0bf; font: 10pt "Outfit", sans-serif;
+  position: absolute; left: 50%; bottom: 0;
+  width: 30mm; margin-left: -15mm;
+  border-top: .25mm solid #111;
 }
 
 .pg-body { position: absolute; left: 69mm; top: 73.5mm; width: 136mm; }
@@ -187,7 +187,7 @@ input[type="text"]:focus, select:focus {
 @page { size: letter; margin: 0; }
 @media print {
   body { background: #fff; }
-  .topbar, .panel, .pg-photo-empty { display: none !important; }
+  .topbar, .panel { display: none !important; }
   .layout { display: block; padding: 0; max-width: none; }
   .preview { position: static; height: auto !important; }
   .scaler { transform: none !important; }

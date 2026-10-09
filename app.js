@@ -109,7 +109,7 @@
     const ctx = document.createElement('canvas').getContext('2d');
     ctx.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
     const width = (t) => ctx.measureText(t).width;
-    const room = (fld.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) * 0.9;
+    const room = (fld.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) * 0.8;
     if (width(grado) <= room) return [grado, ''];
 
     const words = grado.split(' ');
@@ -263,7 +263,7 @@
     const logoMm = { w: 62, h: (62 * logoEl.naturalHeight) / logoEl.naturalWidth };
 
     const text = (t, extra = {}) => new D.TextRun({ text: t, font: 'Calibri', size: 24, ...extra });
-    const valueStyle = { font: 'Century Gothic', size: 19, underline: { type: D.UnderlineType.SINGLE } };
+    const valueStyle = { font: 'Century Gothic', size: 22, underline: { type: D.UnderlineType.SINGLE } };
     // campo en línea: el subrayado se alarga con espacios duros a cada lado
     const field = (v, pad) => new D.TextRun({
       text: v ? NBSP.repeat(pad) + v + NBSP.repeat(pad) : NBSP.repeat(pad * 2 + 8),

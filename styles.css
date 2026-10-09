@@ -161,7 +161,7 @@ input[type="text"]:focus, select:focus {
   border-bottom: .25mm solid #111;
   overflow: hidden;
   text-align: center;
-  font: 9.5pt/5.2mm "Outfit", "Century Gothic", sans-serif;
+  font: 11pt/5.2mm "Outfit", "Century Gothic", sans-serif;
 }
 .fld.full { flex: 1; }
 .fld.left { text-align: left; }
